@@ -6,8 +6,11 @@ auth = Blueprint('auth', __name__)
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     return render_template("login.html",text="Hello World!")
 =======
+=======
+>>>>>>> Stashed changes
     data = request.form
     print(data)
     return render_template("login.html")
