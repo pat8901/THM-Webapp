@@ -7,6 +7,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
+# Login module
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
     #data = request.form
@@ -25,16 +26,16 @@ def login():
                 flash('Incorrect password', category='error')
         else:
             flash('User does not exist', category='error')
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
-
+# Logout module
 @auth.route("/logout")
 @login_required # Decorator that makes sure you can only access this function if the user is logged in 
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-# Signup Module
+# Signup module
 @auth.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
@@ -63,6 +64,6 @@ def sign_up():
             return redirect(url_for('views.home'))  # Once user us sucessfully created redirect user to homepage
 
             
-    return render_template("signUp.html")
+    return render_template("signUp.html", user=current_user)
 
     
